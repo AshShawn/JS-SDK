@@ -9,6 +9,7 @@
  */
 (function(){
     var count = 1;
+    var API_HOST = 'http://open.iot.10086.cn';
     function noop(){}
     function jsonp(url, opts, fn){
         if ('function' == typeof opts) {
@@ -71,7 +72,7 @@
         if(!apiKey){
             alert('初始化OneNetApi时必须传入apiKey！');
         }
-        this._apiKey = apiKey;
+        this._apiKey = encodeURIComponent(apiKey);
     }
 
     OneNetApi.prototype = {
@@ -80,7 +81,7 @@
          * */
         getDataStreams: function(deviceId){
             var doneCallBack;
-            jsonp('http://www.onenetv2.com/api/jsonpresend?key='+this._apiKey+'&method=GET&uri=devices/'+deviceId+'/datastreams', function(error, res){
+            jsonp(API_HOST + '/api/jsonpresend?key='+this._apiKey+'&method=GET&uri=devices/'+deviceId+'/datastreams', function(error, res){
                 if(error || !res.hasOwnProperty('data')){
                     res = {
                         errno: 100,
@@ -101,14 +102,14 @@
          * */
         getDataPoints: function(deviceId, parameter){
             var doneCallBack;
-            var uri = 'cmds';
+            var uri = 'devices/'+deviceId+'/datapoints?';
             if(parameter){
                 for(var i in parameter){
-                    uri += '&' + i + '=' + parameter[i];
+                    uri += '&' + i + '=' + encodeURIComponent(parameter[i]);
                 }
             }
             uri = uri.replace('?&', '?');
-            jsonp('http://www.onenetv2.com/api/jsonpresend?key=' + this._apiKey + '&method=GET&uri=' + encodeURIComponent(uri), function(error, res){
+            jsonp(API_HOST + '/api/jsonpresend?key=' + this._apiKey + '&method=GET&uri=' + uri, function(error, res){
                 if(error || !res.hasOwnProperty('data')){
                     res = {
                         errno: 100,
@@ -129,8 +130,7 @@
          * */
         sendCommand: function(deviceId, command){
             var doneCallBack;
-            var uri = 'devices/'+deviceId+'/datapoints?';
-            jsonp('http://www.onenetv2.com/api/jsonpresend?key=' + this._apiKey + '&method=cmds&uri=cmds&device_id=' + deviceId + '&sms=' + encodeURIComponent(command), function(error, res){
+            jsonp(API_HOST + '/api/jsonpresend?key=' + this._apiKey + '&method=cmds&uri=cmds&device_id=' + deviceId + '&sms=' + encodeURIComponent(command), function(error, res){
                 if(error || !res.hasOwnProperty('errno')){
                     res = {
                         errno: 100,
