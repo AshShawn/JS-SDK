@@ -1,7 +1,7 @@
 # JS-SDK
 javascript SDK for OneNET
 
-``` javasript
+``` javascript
 /**
 * 读取设备多个数据流
 * */
