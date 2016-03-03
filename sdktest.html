@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+        <script src="sdk.js"></script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="loading">
+
+                <div class="line-middle"></div>
+            </div>
+            <div class="img">
+            </div>
+        </div>
+        <script>
+            var api = new OneNetApi('9QWxs9SgvHa8mVEAambFmm2BU9YA');
+            api.sendCommand(63890, 'nimeide').done(function(data){
+                console.log('成功', data);
+            });
+        </script>
+    </body>
+</html>
