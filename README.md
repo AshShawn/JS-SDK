@@ -1,6 +1,10 @@
 # JS-SDK
 javascript SDK for OneNET
 
+## `重要提示：`
+
+使用javascript sdk将会暴露设备的apiKey到浏览器端，**`任何人通过浏览器查看源代码的功能都能得到apiKey`**。如果非内部使用请慎重。
+
 ``` javascript
 /**
  * 读取设备多个数据流
