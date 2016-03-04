@@ -4,9 +4,11 @@
  * Author: limengjun
  * Date: 16-2-26
  * Time: 下午2:27
- * Version: 1.0
- *
+ * Version: 1.0.0
+ * Copyright (c) 2016 中国移动物联网有限公司
+ * Under MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
+
 (function(){
     var count = 1;
     var API_HOST = 'http://open.iot.10086.cn';
