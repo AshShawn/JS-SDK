@@ -104,13 +104,17 @@
          * */
         getDataPoints: function(deviceId, parameter){
             var doneCallBack;
-            var uri = 'devices/'+deviceId+'/datapoints?';
+            var uri = 'devices/'+deviceId+'/datapoints';
+            var uriComponent = '';
             if(parameter){
                 for(var i in parameter){
-                    uri += '&' + i + '=' + encodeURIComponent(parameter[i]);
+                    if(uriComponent){
+                        uriComponent += encodeURIComponent('&');
+                    }
+                    uriComponent += i + '=' + encodeURIComponent(parameter[i]);
                 }
+                uri += encodeURIComponent('?') + uriComponent;
             }
-            uri = uri.replace('?&', '?');
             jsonp(API_HOST + '/api/jsonpresend?key=' + this._apiKey + '&method=GET&uri=' + uri, function(error, res){
                 if(error || !res.hasOwnProperty('data')){
                     res = {
